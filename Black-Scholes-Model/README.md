@@ -10,24 +10,28 @@ The Black-Scholes model derives the fair price of European call and put options 
 
 For a **European call option** (exercisable only at expiration):
 
-$$ C = S \cdot N(d_1) - K \cdot e^{-r t} \cdot N(d_2) $$
+$$
+C = S \cdot N(d_1) - K \cdot e^{-r t} \cdot N(d_2)
+$$
 
 For a **European put option**:
 
-$$ P = K \cdot e^{-r t} \cdot N(-d_2) - S \cdot N(-d_1) $$
+$$
+P = K \cdot e^{-r t} \cdot N(-d_2) - S \cdot N(-d_1)
+$$
 
 Where:
 
-$$ S $$: Current stock price
-$$ K $$: Strike price
-$$ r $$: Risk-free interest rate (annualized, continuous compounding)
-$$ t $$: Time to expiration (in years)
-$$ \sigma $$: Volatility (annualized standard deviation of the stock's log returns)
-$$ N(x) $$: Cumulative distribution function (CDF) of the standard normal distribution
-$$ d_1 = \frac{\ln(S/K) + (r + \sigma^2/2) t}{\sigma \sqrt{t}} $$ (measures how much the option is in-the-money, adjusted for growth)
-$$ d_2 = d_1 - \sigma \sqrt{t} $$ (risk-neutral probability that the option finishes in-the-money)
+$S$: Current stock price
+$K$: Strike price
+$r$: Risk-free interest rate (annualized, continuous compounding)
+$t$: Time to expiration (in years)
+$\sigma$: Volatility (annualized standard deviation of the stock's log returns)
+$N(x)$: Cumulative distribution function (CDF) of the standard normal distribution
+$d_1 = \frac{\ln(S/K) + (r + \sigma^2/2) t}{\sigma \sqrt{t}}$ (measures how much the option is in-the-money, adjusted for growth)
+$$ d_2 = d_1 - \sigma \sqrt{t}$ (risk-neutral probability that the option finishes in-the-money)
 
-The put price can also be derived from call-put parity: $ C - P = S - K e^{-r t} $, ensuring no-arbitrage consistency.
+The put price can also be derived from call-put parity: $C - P = S - K e^{-r t}$, ensuring no-arbitrage consistency.
 
 For more details on the derivation, see the Wikipedia page: [Black–Scholes model](https://en.wikipedia.org/wiki/Black–Scholes_model).
 
@@ -56,7 +60,7 @@ For simulation, sample data like S=100, K=100, r=0.05, t=1 year, σ=0.2 (20%) yi
 
 This implementation uses pure Python with an approximation for the normal CDF (Abramowitz & Stegun method) to avoid dependencies like SciPy. It's encapsulated in a `BlackScholesModel` class with static methods for call and put pricing. The code handles edge cases (e.g., t=0 returns intrinsic value) and includes type hints and docstrings for clarity.
 
-If using SciPy, replace `approx_norm_cdf` with `scipy.stats.norm.cdf` for exact precision. The model is for educational purposes—real-world use should consider extensions for dividends, stochastic volatility (e.g., Heston model), or jumps.
+If using SciPy, replace `approx_norm_cdf` with `scipy.stats.norm.cdf` for exact precision. The model is for educational purposes. For any real-world use should consider extensions for dividends, stochastic volatility (e.g., Heston model), or jumps. (Also don't write your functions in Python.)
 
 ## 04. Simulation Using the Model
 
