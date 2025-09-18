@@ -18,16 +18,16 @@ $$ P = K \cdot e^{-r t} \cdot N(-d_2) - S \cdot N(-d_1) $$
 
 Where:
 
-- $$ S $$: Current stock price
-- $$ K $$: Strike price
-- $$ r $$: Risk-free interest rate (annualized, continuous compounding)
-- $$ t $$: Time to expiration (in years)
-- $$ \sigma $$: Volatility (annualized standard deviation of the stock's log returns)
-- $$ N(x) $$: Cumulative distribution function (CDF) of the standard normal distribution
-- $$ d_1 = \frac{\ln(S/K) + (r + \sigma^2/2) t}{\sigma \sqrt{t}} $$ (measures how much the option is in-the-money, adjusted for growth)
-- $$ d_2 = d_1 - \sigma \sqrt{t} $$ (risk-neutral probability that the option finishes in-the-money)
+$$ S $$: Current stock price
+$$ K $$: Strike price
+$$ r $$: Risk-free interest rate (annualized, continuous compounding)
+$$ t $$: Time to expiration (in years)
+$$ \sigma $$: Volatility (annualized standard deviation of the stock's log returns)
+$$ N(x) $$: Cumulative distribution function (CDF) of the standard normal distribution
+$$ d_1 = \frac{\ln(S/K) + (r + \sigma^2/2) t}{\sigma \sqrt{t}} $$ (measures how much the option is in-the-money, adjusted for growth)
+$$ d_2 = d_1 - \sigma \sqrt{t} $$ (risk-neutral probability that the option finishes in-the-money)
 
-The put price can also be derived from call-put parity: $$ C - P = S - K e^{-r t} $$, ensuring no-arbitrage consistency.
+The put price can also be derived from call-put parity: $ C - P = S - K e^{-r t} $, ensuring no-arbitrage consistency.
 
 For more details on the derivation, see the Wikipedia page: [Black–Scholes model](https://en.wikipedia.org/wiki/Black–Scholes_model).
 
