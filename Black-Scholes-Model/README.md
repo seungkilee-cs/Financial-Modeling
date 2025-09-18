@@ -2,7 +2,9 @@
 
 The Black-Scholes model is a foundational mathematical framework for pricing options contracts. Developed in 1973 by economists Fischer Black and Myron Scholes, with significant contributions from Robert Merton (who extended it to include dividends and other factors), it revolutionized financial markets by providing a closed-form solution for option pricing. Black and Scholes published their seminal paper "The Pricing of Options and Corporate Liabilities" in the Journal of Political Economy, while Merton's work appeared shortly after. In 1997, Scholes and Merton were awarded the Nobel Prize in Economics for this breakthrough (Black had passed away in 1995).
 
-The model gained immense popularity because it offered a theoretically sound, computationally efficient way to value options, enabling the explosive growth of derivatives trading (e.g., on the Chicago Board Options Exchange, which opened in 1973). It remains a standard tool in finance for risk management, hedging, and valuation, despite its simplifying assumptions. However, it's primarily designed for **European options** (exercisable only at expiration). For **American options** (exercisable anytime before expiration), early exercise possibilities require more complex models like binomial trees or finite difference methods, as the Black-Scholes formula doesn't account for optimal early exercise. Note that "European" and "American" refer to exercise styles, not geographic regions—options traded in Europe can be American-style, and vice versa. For **Asian options** (common in Asia but not geographically limited), which depend on the average price path, entirely different models (e.g., Monte Carlo simulations) are needed due to path dependency.
+The model gained immense popularity because it offered a theoretically sound, computationally efficient way to value options, enabling the explosive growth of derivatives trading (e.g., on the Chicago Board Options Exchange, which opened in 1973). It remains a standard tool in finance for risk management, hedging, and valuation, despite its simplifying assumptions. However, it's primarily designed for **European options** (exercisable only at expiration).
+For **American options** (exercisable anytime before expiration), early exercise possibilities require more complex models like binomial trees or finite difference methods, as the Black-Scholes formula doesn't account for optimal early exercise. Note that "European" and "American" refer to exercise styles, not geographic regions. The options traded in Europe can be American-style, and vice versa.
+For **Asian options** (common in Asia but not geographically limited), which depend on the average price path, entirely different models (e.g., Monte Carlo simulations) are needed due to path dependency.
 
 ## 01. Understanding the Black-Scholes Formula
 
@@ -22,13 +24,13 @@ $$
 
 Where:
 
-$S$: Current stock price
-$K$: Strike price
-$r$: Risk-free interest rate (annualized, continuous compounding)
-$t$: Time to expiration (in years)
-$\sigma$: Volatility (annualized standard deviation of the stock's log returns)
-$N(x)$: Cumulative distribution function (CDF) of the standard normal distribution
-$d_1 = \frac{\ln(S/K) + (r + \sigma^2/2) t}{\sigma \sqrt{t}}$ (measures how much the option is in-the-money, adjusted for growth)
+$S$: Current stock price  
+$K$: Strike price  
+$r$: Risk-free interest rate (annualized, continuous compounding)  
+$t$: Time to expiration (in years)  
+$\sigma$: Volatility (annualized standard deviation of the stock's log returns)  
+$N(x)$: Cumulative distribution function (CDF) of the standard normal distribution  
+$d_1 = \frac{\ln(S/K) + (r + \sigma^2/2) t}{\sigma \sqrt{t}}$ (measures how much the option is in-the-money, adjusted for growth)  
 $$ d_2 = d_1 - \sigma \sqrt{t}$ (risk-neutral probability that the option finishes in-the-money)
 
 The put price can also be derived from call-put parity: $C - P = S - K e^{-r t}$, ensuring no-arbitrage consistency.
