@@ -19,33 +19,42 @@ For reproducibility, each model includes sample data and outputs. Tools like Poe
 
 (Note: All model descriptions below are accurate based on standard financial theory. No inaccuracies were found in the provided overviews—they concisely capture the essence without errors.)
 
-### 01. [Black-Scholes Model](./Black-Scholes-Model/README.md) [Status: DONE ✅]
+### 01. [Black-Scholes Model](./python-model/Black-Scholes-Model/README.md) [Status: DONE ✅]
+
 Prices European options using a closed-form formula assuming lognormal stock prices.
 
 My Impression: Works long as your stocks don't pay dividends or throw curveballs.
 
 ### 02. [Monte Carlo Simulation for Option Pricing](./Monte-Carlo-Model/README.md) [Status: Not Started ⏳]
+
 Uses random simulations of stock paths to price path-dependent options.
 
 ### 03. [Binomial Option Pricing Model](./Binomial-Model/README.md) [Status: Not Started ⏳]
+
 Builds a price tree for American options, allowing early exercise valuation.
 
 ### 04. [Capital Asset Pricing Model (CAPM)](./CAPM-Model/README.md) [Status: Not Started ⏳]
+
 Estimates asset returns based on market risk (beta).
 
 ### 05. [Value at Risk (VaR)](./VaR-Model/README.md) [Status: Not Started ⏳]
+
 Quantifies potential portfolio losses at a confidence level.
 
 ### 06. [Markowitz Portfolio Optimization](./Markowitz-Model/README.md) [Status: Not Started ⏳]
+
 Optimizes asset allocations for maximum return at minimum risk.
 
 ### 07. [GARCH Model for Volatility Forecasting](./GARCH-Model/README.md) [Status: Not Started ⏳]
+
 Models time-varying volatility in returns.
 
 ### 08. [Discounted Cash Flow (DCF) Valuation](./DCF-Model/README.md) [Status: Not Started ⏳]
+
 Values companies by discounting projected cash flows.
 
 ### 09. [Black-Litterman Asset Allocation](./Black-Litterman-Model/README.md) [Status: Not Started ⏳]
+
 Blends market equilibrium with investor views for portfolio optimization.
 
 ## Potential Future Extensions
