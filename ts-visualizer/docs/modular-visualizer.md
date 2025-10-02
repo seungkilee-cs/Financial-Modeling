@@ -62,3 +62,5 @@ Existing styles in `src/App.css` now apply to `<ModelVisualizer>` via shared cla
 - **Advanced controls**: extend `ControlDescriptor` to support toggles, selects, or multi-field inputs if future models demand them.
 
 By modularizing the visualizer now, adding the next model becomes a matter of authoring a definition file rather than rewriting the dashboard. This keeps the codebase maintainable and primes the project for rapid experimentation with new financial modeling techniques.
+
+## New 
