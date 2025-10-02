@@ -8,9 +8,7 @@
     "lint": "eslint .",
     "build": "tsc -b || true && vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d ../docs"
-  },
+    "predeploy": "npm run build"  },
   "dependencies": {
     "@types/plotly.js": "^3.0.6",
     "plotly.js": "^3.1.0",
