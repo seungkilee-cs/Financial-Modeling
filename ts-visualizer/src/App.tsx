@@ -125,6 +125,7 @@ export default function App() {
           max={150}
           step={1}
           value={params.S}
+          hint="Current price of the underlying asset in dollars."
           onChange={(v) => setParams((p) => ({ ...p, S: v }))}
         />
         <Slider
@@ -133,6 +134,7 @@ export default function App() {
           max={120}
           step={5}
           value={params.K}
+          hint="Exercise price agreed upon in the option contract."
           onChange={(v) => setParams((p) => ({ ...p, K: v }))}
         />
         <Slider
@@ -141,6 +143,7 @@ export default function App() {
           max={2}
           step={0.1}
           value={params.t}
+          hint="Remaining lifespan of the option measured in years."
           onChange={(v) => setParams((p) => ({ ...p, t: v }))}
         />
         <Slider
@@ -149,6 +152,7 @@ export default function App() {
           max={10}
           step={0.5}
           value={params.r * 100}
+          hint="Continuously compounded annual rate used for discounting."
           onChange={(v) => setParams((p) => ({ ...p, r: v / 100 }))}
         />
         <Slider
@@ -157,6 +161,7 @@ export default function App() {
           max={50}
           step={1}
           value={params.sigma * 100}
+          hint="Annualized standard deviation of log returns, representing uncertainty."
           onChange={(v) => setParams((p) => ({ ...p, sigma: v / 100 }))}
         />
       </div>
@@ -173,81 +178,93 @@ export default function App() {
       </div>
 
       <div className="charts">
-        <Plot
-          data={[
-            {
-              x: volData.xs,
-              y: volData.callYs,
-              type: "scatter",
-              mode: "lines",
-              name: "Call",
-              line: { color: "#2E86C1" },
-            },
-            {
-              x: volData.xs,
-              y: volData.putYs,
-              type: "scatter",
-              mode: "lines",
-              name: "Put",
-              line: { color: "#E74C3C" },
-            },
-          ]}
-          layout={{
-            title: "Prices vs Volatility",
-            xaxis: { title: "σ" },
-            yaxis: { title: "Price" },
-          }}
-          style={{ width: "100%", height: 420 }}
-          config={{ responsive: true }}
-        />
-        <Plot
-          data={[
-            {
-              x: stockData.xs,
-              y: stockData.callYs,
-              type: "scatter",
-              mode: "lines",
-              name: "Call",
-              line: { color: "#2E86C1" },
-            },
-            {
-              x: stockData.xs,
-              y: stockData.putYs,
-              type: "scatter",
-              mode: "lines",
-              name: "Put",
-              line: { color: "#E74C3C" },
-            },
-          ]}
-          layout={{
-            title: "Prices vs Stock Price",
-            xaxis: { title: "S" },
-            yaxis: { title: "Price" },
-          }}
-          style={{ width: "100%", height: 420 }}
-          config={{ responsive: true }}
-        />
-        <Plot
-          data={[
-            {
-              z: surface.z,
-              x: surface.strikes,
-              y: surface.vols,
-              type: "surface",
-              colorscale: "Viridis",
-            } as any,
-          ]}
-          layout={{
-            title: "Call Price Surface",
-            scene: {
-              xaxis: { title: "K" },
-              yaxis: { title: "σ" },
-              zaxis: { title: "Call" },
-            },
-          }}
-          style={{ width: "100%", height: 520 }}
-          config={{ responsive: true }}
-        />
+        <div className="plot-card">
+          <h3>Volatility Impact on Option Prices</h3>
+          <Plot
+            data={[
+              {
+                x: volData.xs,
+                y: volData.callYs,
+                type: "scatter",
+                mode: "lines",
+                name: "Call",
+                line: { color: "#2E86C1" },
+              },
+              {
+                x: volData.xs,
+                y: volData.putYs,
+                type: "scatter",
+                mode: "lines",
+                name: "Put",
+                line: { color: "#E74C3C" },
+              },
+            ]}
+            layout={{
+              title: "Pricing vs. Volatility",
+              margin: { t: 50, r: 30, b: 60, l: 55 },
+              xaxis: { title: { text: "Volatility σ" } },
+              yaxis: { title: { text: "Option Price" } },
+            }}
+            style={{ width: "100%", height: 420 }}
+            config={{ responsive: true }}
+          />
+        </div>
+        <div className="plot-card">
+          <h3>Underlying Price Impact on Option Prices</h3>
+          <Plot
+            data={[
+              {
+                x: stockData.xs,
+                y: stockData.callYs,
+                type: "scatter",
+                mode: "lines",
+                name: "Call",
+                line: { color: "#2E86C1" },
+              },
+              {
+                x: stockData.xs,
+                y: stockData.putYs,
+                type: "scatter",
+                mode: "lines",
+                name: "Put",
+                line: { color: "#E74C3C" },
+              },
+            ]}
+            layout={{
+              title: "Pricing vs. Underlying Stock",
+              margin: { t: 50, r: 30, b: 60, l: 55 },
+              xaxis: { title: { text: "Stock Price S" } },
+              yaxis: { title: { text: "Option Price" } },
+            }}
+            style={{ width: "100%", height: 420 }}
+            config={{ responsive: true }}
+          />
+        </div>
+        <div className="plot-card">
+          <h3>Strike & Volatility Surface for Call Prices</h3>
+          <Plot
+            data={[
+              {
+                z: surface.z,
+                x: surface.strikes,
+                y: surface.vols,
+                type: "surface",
+                colorscale: "Viridis",
+              } as any,
+            ]}
+            layout={{
+              title: "Call Price Surface",
+              margin: { t: 60, r: 40, b: 40, l: 40 },
+              scene: {
+                xaxis: { title: { text: "Strike Price K" } },
+                yaxis: { title: { text: "Volatility σ" } },
+                zaxis: { title: { text: "Call Price" } },
+              },
+            }}
+            style={{ width: "100%", height: 520 }}
+            config={{ responsive: true }}
+          />
+        </div>
       </div>
     </div>
   );
@@ -259,12 +276,18 @@ function Slider(props: {
   max: number;
   step: number;
   value: number;
+  hint: string;
   onChange: (v: number) => void;
 }) {
   return (
     <div className="control">
       <label>
-        {props.label}: <strong>{props.value}</strong>
+        <span className="label-text">{props.label}</span>
+        <span className="info-badge" aria-label={props.hint} role="tooltip">
+          ?
+          <span className="tooltip">{props.hint}</span>
+        </span>
+        <strong>{props.value}</strong>
       </label>
       <input
         type="range"
