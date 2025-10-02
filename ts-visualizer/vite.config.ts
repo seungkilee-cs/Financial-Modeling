@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [react()],
   base: "/financial-modeling/",
   build: {
-    outDir: "../docs",
+    outDir: "../dist",
   },
 });
