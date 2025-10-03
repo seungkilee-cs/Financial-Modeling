@@ -7,6 +7,7 @@ import "./App.css";
 export default function App() {
   const [modelId, setModelId] = useState<ModelId>(modelList[0].id);
   const model = modelMap[modelId];
+  const githubIconSrc = `${import.meta.env.BASE_URL}github-mark.svg`;
 
   return (
     <div className="app-shell">
@@ -16,11 +17,12 @@ export default function App() {
           <p>Explore scenarios and understand outcomes with polished, data-rich visuals.</p>
         </div>
         <nav className="header-actions" aria-label="Helpful resources">
-          <a href="#" className="header-link">
+          {/* <a href="https://github.com/seungkilee-cs/Financial-Modeling/tree/master/python-model/Black-Scholes-Model" className="header-link">
             View Docs
-          </a>
-          <a href="#" className="header-link">
-            GitHub
+          </a> */}
+          <a href="https://github.com/seungkilee-cs/financial-modeling" className="header-link">
+            <img src={githubIconSrc} alt="" aria-hidden="true" className="header-icon" />
+            Github
           </a>
         </nav>
       </header>

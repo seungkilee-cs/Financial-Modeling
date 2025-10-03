@@ -83,14 +83,14 @@ export function ModelVisualizer({ model }: ModelVisualizerProps) {
               <p className="panel-label">Forecast visualization</p>
               <h3>Performance outlook</h3>
             </div>
-            <div className="chart-actions" role="group" aria-label="Chart actions">
+            {/* <div className="chart-actions" role="group" aria-label="Chart actions">
               <button type="button" className="ghost-button" aria-label="Reset view">
                 Reset
               </button>
               <button type="button" className="ghost-button" aria-label="Export chart">
                 Export
               </button>
-            </div>
+            </div> */}
           </header>
           <div className="chart-body">
             <model.Visualization params={params} />
