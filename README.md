@@ -1,75 +1,69 @@
 # Financial Modeling
 
-> As someone with a background in Economics and Computer Science, you kinda have to delve into these modelings.
+Hands-on exploration of quantitative finance models through two complementary tracks:
 
-This repository is a hands-on learning project where I implement classic mathematical models from scratch in Python. The goal is to demystify the math behind finance, understand assumptions and limitations, and build intuition through code. No fancy libraries unless necessary—pure Python where possible for educational value.
+- Python prototypes under `python-model/` for rapid experimentation and mathematical validation
+- A TypeScript visualizer in `ts-visualizer/` that turns validated models into interactive dashboards
 
-Each model lives in its own subdirectory with a dedicated README, code, and sample simulations. Start with the basics and expand to more advanced topics.
+The goal is to understand theory, document assumptions, and present results with polished visuals that are easy to share.
+
+## Repository Layout
+
+- `python-model/` contains per-model Python implementations and write-ups
+- `ts-visualizer/` hosts the React + TypeScript application and related documentation
+- `docs/` (if present within directories) provides model-specific notes, derivations, or usage tips
 
 ## Getting Started
 
-1. Clone the repo: `git clone <repo-url>`
-2. Navigate to a model: e.g., `cd Black-Scholes-Model`
-3. Run the code: `python model_file.py` (or use Poetry/venv as detailed in sub-READMEs)
-4. Dependencies: Minimal—most use `math`; some may add `numpy` or `scipy` for efficiency.
+### Python prototypes
 
-For reproducibility, each model includes sample data and outputs. Tools like Poetry are used for dependency management in subprojects.
+1. Install Python 3.11+ and create a virtual environment
+2. Navigate to a model directory under `python-model/`
+3. Follow the local README for dependencies (most rely on the standard library, some use NumPy or SciPy)
+4. Run the scripts or notebooks to reproduce calculations and sample scenarios
 
-## Models Implemented
+### TypeScript visualizer
 
-(Note: All model descriptions below are accurate based on standard financial theory. No inaccuracies were found in the provided overviews—they concisely capture the essence without errors.)
+1. Navigate to `ts-visualizer/`
+2. Install dependencies with `npm install`
+3. Start the dev server via `npm run dev`
+4. For production builds use `npm run build` and refer to `ts-visualizer/docs/start-new-visualizer.md` for GitHub Pages deployment details
 
-### 01. [Black-Scholes Model](./python-model/Black-Scholes-Model/README.md) [Status: DONE ✅]
+## Documentation
 
-Prices European options using a closed-form formula assuming lognormal stock prices.
+- `ts-visualizer/README.md` describes the app shell, feature set, and scripts
+- `ts-visualizer/docs/adding-model.md` outlines how to register additional models
+- `ts-visualizer/docs/models/{MODEL_NAME}.md` captures background, validation, and UI behavior for the my model implementation
 
-My Impression: Works long as your stocks don't pay dividends or throw curveballs.
+## Model Roadmap
 
-### 02. [Monte Carlo Simulation for Option Pricing](./Monte-Carlo-Model/README.md) [Status: Not Started ⏳]
+| ID | Model | Python prototype | Visualizer implementation | Notes |
+| -- | ----- | ---------------- | ------------------------- | ----- |
+| 01 | [Black-Scholes](./python-model/Black-Scholes-Model/README.md) | Complete | Live in `ts-visualizer` | Includes documentation and Plotly charts |
+| 02 | Monte Carlo option pricing | Planned | Planned | Random path simulations for path-dependent derivatives |
+| 03 | Binomial option pricing | Planned | Planned | Tree-based pricing foundation for American options |
+| 04 | CAPM | Planned | Planned | Factor model for expected returns |
+| 05 | Value at Risk | Planned | Planned | Risk measurement via distribution tails |
+| 06 | Markowitz portfolio optimization | Planned | Planned | Mean-variance allocation with efficient frontier |
+| 07 | GARCH volatility forecasting | Planned | Planned | Time-varying variance model |
+| 08 | Discounted cash flow valuation | Planned | Planned | Cash flow projection and discounting |
+| 09 | Black-Litterman asset allocation | Planned | Planned | Combines equilibrium with investor views |
 
-Uses random simulations of stock paths to price path-dependent options.
+## Workflow Overview
 
-### 03. [Binomial Option Pricing Model](./Binomial-Model/README.md) [Status: Not Started ⏳]
+1. Prototype new models in Python to internalize theory and verify calculations
+2. Capture findings, assumptions, and validation notes in per-model documentation
+3. Port the model into `ts-visualizer/` using the shared `FinancialModelDefinition` contract
+4. Register the model so it appears in the UI and document the visualization steps
+5. Optionally extract reusable pieces into `portable/` for other analytics dashboards
 
-Builds a price tree for American options, allowing early exercise valuation.
+## Future Extensions
 
-### 04. [Capital Asset Pricing Model (CAPM)](./CAPM-Model/README.md) [Status: Not Started ⏳]
-
-Estimates asset returns based on market risk (beta).
-
-### 05. [Value at Risk (VaR)](./VaR-Model/README.md) [Status: Not Started ⏳]
-
-Quantifies potential portfolio losses at a confidence level.
-
-### 06. [Markowitz Portfolio Optimization](./Markowitz-Model/README.md) [Status: Not Started ⏳]
-
-Optimizes asset allocations for maximum return at minimum risk.
-
-### 07. [GARCH Model for Volatility Forecasting](./GARCH-Model/README.md) [Status: Not Started ⏳]
-
-Models time-varying volatility in returns.
-
-### 08. [Discounted Cash Flow (DCF) Valuation](./DCF-Model/README.md) [Status: Not Started ⏳]
-
-Values companies by discounting projected cash flows.
-
-### 09. [Black-Litterman Asset Allocation](./Black-Litterman-Model/README.md) [Status: Not Started ⏳]
-
-Blends market equilibrium with investor views for portfolio optimization.
-
-## Potential Future Extensions
-
-To take this project further, here are some ideas for enhancements—focusing on practicality, visualization, and real-world application:
-
-- Add Visualizations: Integrate Matplotlib or Plotly for plotting price paths (Monte Carlo), efficient frontiers (Markowitz), or volatility forecasts (GARCH). E.g., simulate 100 paths in Monte Carlo and graph them.
-- Real Data Integration: Pull live stock data via APIs like yfinance or Alpha Vantage. Use it to estimate inputs (e.g., historical volatility for Black-Scholes) or backtest models against actual market performance.
-- Unit Tests and Validation: Add pytest suites to verify outputs against known benchmarks or compare models (e.g., Black-Scholes vs. Binomial convergence).
-- Greeks and Sensitivities: Extend option models with Delta, Gamma, Theta, Vega, Rho—compute how prices change with inputs.
-- Advanced Variants: Implement Heston for stochastic volatility, CIR for interest rates, or machine learning tweaks (e.g., neural nets for option pricing).
-- GUI or Web App: Build a simple Streamlit dashboard to input parameters and visualize results interactively.
-- Performance Optimizations: Vectorize with NumPy for speed in simulations, or parallelize Monte Carlo with multiprocessing.
-- Comparative Analysis: Add scripts to run multiple models on the same data and compare (e.g., VaR vs. historical simulation accuracy).
+- Expand the model set across asset classes and risk methodologies
+- Integrate historical market data pulls for calibration and backtesting
+- Add automated tests comparing Python outputs with the visualizer implementation
+- Explore deployment of the visualizer toolkit to economics or statistics domains using the `portable/` package
 
 ## License
 
-This project is for educational purposes and licensed under MIT. Feel free to use, modify, and share.
+This repository is licensed under MIT. Use, modify, and share freely.
