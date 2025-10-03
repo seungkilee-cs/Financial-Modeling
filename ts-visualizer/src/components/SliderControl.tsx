@@ -8,22 +8,30 @@ interface SliderControlProps {
 }
 
 export function SliderControl({ descriptor, sliderValue, displayValue, onChange }: SliderControlProps) {
+  const sliderId = `control-${descriptor.key}`;
+  const hintId = `${sliderId}-hint`;
+
   return (
     <div className="control">
-      <label>
-        <span className="label-text">{descriptor.label}</span>
-        <span className="info-badge" aria-label={descriptor.hint} role="tooltip">
-          ?
-          <span className="tooltip">{descriptor.hint}</span>
+      <div className="control-header">
+        <label className="control-label" htmlFor={sliderId}>
+          {descriptor.label}
+        </label>
+        <span className="control-value" aria-live="polite">
+          {displayValue}
         </span>
-        <strong>{displayValue}</strong>
-      </label>
+      </div>
+      <p id={hintId} className="control-hint">
+        {descriptor.hint}
+      </p>
       <input
+        id={sliderId}
         type="range"
         min={descriptor.slider?.min ?? descriptor.min}
         max={descriptor.slider?.max ?? descriptor.max}
         step={descriptor.slider?.step ?? descriptor.step}
         value={sliderValue}
+        aria-describedby={hintId}
         onChange={(event) => onChange(parseFloat(event.target.value))}
       />
     </div>
